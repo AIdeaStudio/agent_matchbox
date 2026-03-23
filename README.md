@@ -83,31 +83,7 @@
 
 ## 🛠️ 第一次配置流程 (新手必读)
 
-## ⚠️ 迁移文件生成规范（非常重要）
-
-- **不要手动编写或手动复制 Alembic 迁移文件。**
-- **必须通过 [`server/gen_migration.py`](../../gen_migration.py) 来生成迁移文件。**
-- 本项目的迁移链路是围绕 [`gen_migration.py`](../../gen_migration.py) 设计的，它会：
-  - 先同步当前数据库版本
-  - 再自动检测 ORM 模型变更
-  - 再生成对应的 Alembic 迁移文件
-- 生成出的迁移文件不需要你手工再逐个执行；项目启动时会通过 [`server/core/auto_migrate.py`](../../core/auto_migrate.py) 自动应用所有尚未执行的迁移。
-
-### 正确做法
-
-当你修改了 [`models.py`](models.py) 里的数据库结构后：
-
-1. 运行 [`python server/gen_migration.py`](../../gen_migration.py)
-2. 检查自动生成的迁移文件是否符合预期
-3. 正常启动项目，让启动期自动迁移逻辑去应用这些迁移
-
-### 错误做法
-
-- 不要自己手写 Alembic 迁移文件
-- 不要跳过 [`gen_migration.py`](../../gen_migration.py) 直接凭感觉创建 revision
-- 不要让代码先引用新字段、数据库却还停留在旧 revision
-
-**注意：** 项目自带的配置文件 (`llm_mgr_cfg.yaml`) 预置了许多主流模型配置，但其中的 API Key 是无效的（占位用的）。
+**注意：** 项目自带的配置文件 (`llm_mgr_cfg.yaml`) 适用于快速迁移或者分享自己模型配置的，但其中的 API Key 是无效的（为了保护站长密钥而进行加密，同时满足分享和快速部署的需求）。
 
 首次使用时，你需要运行配置工具，填入你自己的 API Key。
 
